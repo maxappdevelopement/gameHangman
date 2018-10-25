@@ -7,6 +7,13 @@
     <style name="CustomToolbarStyle" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textSize">10sp</item>
+
+
+    </style>
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:showAsAction">ifRoom</item>
+        <item name="android:textSize">20sp</item>
 
     </style>
 

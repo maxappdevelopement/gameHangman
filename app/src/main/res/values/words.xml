@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="playWords">
+        <item>bagpipes</item>
+        <item>oxygen</item>
+        <item>rhythmic</item>
+        <item>jukebox</item>
+        <item>zombie</item>
+        <item>mystify</item>
+        <item>fishhook</item>
+        <item>dwarves</item>
+        <item>shabiness</item>
+    </string-array>
+
+
+
+
+
+</resources>

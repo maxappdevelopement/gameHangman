@@ -1,11 +1,11 @@
 package appdevelopement.max.hangman;
 
-import android.content.res.TypedArray;
-import android.widget.EditText;
+
+import android.arch.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-public class Hangman {
+public class Hangman extends ViewModel {
 
     int numberOfGuesses = 10;
     private String word;

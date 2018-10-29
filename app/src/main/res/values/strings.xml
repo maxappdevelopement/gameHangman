@@ -3,4 +3,7 @@
     <string name="playbutton">PlayButton</string>
     <string name="info">Info</string>
     <string name="about">Programmed by Max hell ye</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

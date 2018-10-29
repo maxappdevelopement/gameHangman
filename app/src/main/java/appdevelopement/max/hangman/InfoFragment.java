@@ -1,6 +1,5 @@
 package appdevelopement.max.hangman;
 
-import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,21 +12,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class InfoActivity extends Fragment {
+public class InfoFragment extends Fragment {
 
-    public InfoActivity() {}
+    public InfoFragment() {}
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
         Toolbar toolbar = view.findViewById(R.id.app_bar);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
-
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);
         activity.getSupportActionBar().setTitle("About");
+        setHasOptionsMenu(true);
 
         return view;
     }
@@ -40,18 +38,27 @@ public class InfoActivity extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(false);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.home:
-                MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,
-                        new HomeActivity(), null).addToBackStack(null).commit();
+            case R.id.back_action:
+                getFragmentManager().popBackStackImmediate();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        MenuItem playaction = menu.findItem(R.id.play_action);
+        MenuItem infoaction = menu.findItem(R.id.info_action);
+        MenuItem backaction = menu.findItem(R.id.back_action);
+        playaction.setVisible(false);
+        infoaction.setVisible(false);
+        backaction.setVisible(true);
+    }
+
 }
 

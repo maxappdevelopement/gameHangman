@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoActivity">
+    tools:context=".HomeFragment">
 
     <include
-        layout="@layout/app_bar"
+        layout="@layout/custom_toolbar"
         android:id="@+id/app_bar">
     </include>
 

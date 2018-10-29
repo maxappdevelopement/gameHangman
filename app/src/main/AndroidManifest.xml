@@ -18,11 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InfoActivity" />
+        <activity android:name=".InfoFragment" />
         <activity
-            android:name=".GameActivity"
+            android:name=".GameFragment"
             android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".HomeFragment"></activity>
     </application>
 
 </manifest>

@@ -1,17 +1,16 @@
 package appdevelopement.max.hangman;
 
 
-import android.arch.lifecycle.ViewModel;
-
 import java.util.ArrayList;
 
-public class Hangman extends ViewModel {
+public class Hangman {
 
     int numberOfGuesses = 10;
     private String word;
     private boolean[] visible;
     private ArrayList<Character> guessLetters = new ArrayList<>();
     char guessLetter;
+
 
     public Hangman(String word) {
     this.word = word;
@@ -64,14 +63,14 @@ public class Hangman extends ViewModel {
         return badLettersUsed.toUpperCase();
     }
 
-    public int getTriesLeft() {
+    public String getTriesLeft() {
         int triesLeft = numberOfGuesses;
         for (int i = 0; i < guessLetters.size(); i++) {
             if(word.indexOf(guessLetters.get(i))== -1) {
                 triesLeft--;
             }
         }
-        return triesLeft;
+        return triesLeft + "";
     }
 
     public boolean hasUsedLetter(char guessLetter) {

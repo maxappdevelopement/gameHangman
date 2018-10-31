@@ -17,9 +17,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:onClick="guessButton"
-        android:text="Guess"
+        android:text="@string/guessButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answerSequence" />
+        app:layout_constraintTop_toBottomOf="@+id/displayHiddenWord" />
 
     <ImageView
         android:id="@+id/pictureView"
@@ -28,7 +28,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:contentDescription="Picture"
+        android:contentDescription="@string/pictureView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar" />
@@ -41,15 +41,16 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Guess a letter"
+        android:hint="@string/guessALetter"
         android:inputType="textPersonName"
 
         app:layout_constraintEnd_toStartOf="@+id/guessButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answerSequence" />
+        app:layout_constraintTop_toBottomOf="@+id/displayHiddenWord"
+        android:autofillHints="" />
 
     <TextView
-        android:id="@+id/answerSequence"
+        android:id="@+id/displayHiddenWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -62,12 +63,12 @@
         app:layout_constraintTop_toTopOf="@+id/endOfAnswerSequence" />
 
     <TextView
-        android:id="@+id/textTriesLeft"
+        android:id="@+id/triesLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:text="tries left"
+        android:text="@string/triesLeft"
         app:layout_constraintStart_toEndOf="@+id/numberOfTriesLeft"
         app:layout_constraintTop_toTopOf="@+id/endOfPicture" />
 
@@ -82,12 +83,12 @@
         app:layout_constraintTop_toTopOf="@+id/endOfPicture" />
 
     <TextView
-        android:id="@+id/failedLetters"
+        android:id="@+id/badLettersUsed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTriesLeft" />
+        app:layout_constraintTop_toBottomOf="@+id/triesLeft" />
 
     <android.support.constraint.Guideline
         android:id="@+id/endOfAnswerSequence"

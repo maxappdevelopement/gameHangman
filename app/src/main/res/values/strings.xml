@@ -1,9 +1,35 @@
 <resources>
-    <string name="MainMenu">Huvudmeny</string>
-    <string name="playbutton">PlayButton</string>
-    <string name="info">Info</string>
+    <string name="MainMenu">Main menu</string>
+    <string name="playButton">Playbutton</string>
+    <string name="infoButton">Information</string>
     <string name="about">Programmed by Max hell ye</string>
+    <string name="wordWas">The word was</string>
+    <string name="youWon">You won!</string>
+    <string name="youLost">You lost!</string>
+    <string name="titleResult">Result</string>
+    <string name="scoreTriesLeft">Amount of tries left</string>
+    <string name="backToMenu">Back to main menu</string>
+    <string name="titleHangman">Hangman</string>
+    <string name="guessButton">Guess</string>
+    <string name="pictureView">Picture</string>
+    <string name="guessALetter">Guess a letter</string>
+    <string name="triesLeft">Tries left</string>
+    <string name="titleAbout">About</string>
+    <string name="backArrow">Back</string>
+    <string name="oneLetter">Only one letter is allowed</string>
+    <string name="usedLetter">Letter already used</string>
+    <string name="theme">Theme</string>
+    <string name="playGame">Play game</string>
+    <string name="gameContinue">Continue</string>
+    <string name="word1">bagpipes</string>
+    <string name="word2">confectioner</string>
+    <string name="word3">oxygen</string>
+    <string name="word4">rhythmic</string>
+    <string name="word5">jukebox</string>
+    <string name="word6">zombie</string>
+    <string name="word7">mystify</string>
+    <string name="word8">fishhook</string>
+    <string name="word9">dwarves</string>
+    <string name="word10">shabiness</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

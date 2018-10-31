@@ -5,21 +5,20 @@
     <item
         android:id="@+id/play_action"
         android:icon="@drawable/ic_play_arrow_black_24dp"
-        android:title="@string/playbutton"
+        android:title="@string/playButton"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/back_action"
         android:icon="@drawable/ic_back_arrow"
-        android:title="Back"
+        android:title="@string/backArrow"
         android:visible="false"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/info_action"
         android:icon="@drawable/ic_info_black_24dp"
-        android:title="@string/info"
+        android:title="@string/infoButton"
         app:showAsAction="ifRoom"/>
-
 
 </menu>

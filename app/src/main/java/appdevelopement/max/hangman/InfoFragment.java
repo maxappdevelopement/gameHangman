@@ -20,13 +20,7 @@ public class InfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info, container, false);
-        Toolbar toolbar = view.findViewById(R.id.app_bar);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);
-        activity.getSupportActionBar().setTitle("About");
-        setHasOptionsMenu(true);
-
+        createInfoFragmentToolbar(view);
         return view;
     }
 
@@ -36,15 +30,10 @@ public class InfoFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.back_action:
-                getFragmentManager().popBackStackImmediate();
+                getFragmentManager().popBackStack();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -60,5 +49,13 @@ public class InfoFragment extends Fragment {
         backaction.setVisible(true);
     }
 
+    private void createInfoFragmentToolbar(View view) {
+        Toolbar toolbar = view.findViewById(R.id.app_bar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);
+        activity.getSupportActionBar().setTitle(R.string.titleAbout);
+        setHasOptionsMenu(true);
+    }
 }
 

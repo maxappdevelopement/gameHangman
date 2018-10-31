@@ -4,12 +4,12 @@ import android.arch.lifecycle.ViewModel;
 
 public class SaveStateViewModel extends ViewModel {
 
-    private String word = "";
+    private boolean isActiveGame = false;
+    private String word;
     private char guessLetter;
     private String hiddenWord;
     private String triesLeft;
     private String badLettersUsed;
-
 
     public String getHiddenWord() {
         return hiddenWord;
@@ -49,5 +49,13 @@ public class SaveStateViewModel extends ViewModel {
 
     public void setGuessLetter(char guessLetter) {
         this.guessLetter = guessLetter;
+    }
+
+    public boolean isActiveGame() {
+        return isActiveGame;
+    }
+
+    public void setActiveGame(boolean active) {
+        isActiveGame = active;
     }
 }

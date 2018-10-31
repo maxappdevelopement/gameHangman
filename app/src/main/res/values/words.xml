@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="playWords">
-        <item>bagpipes</item>
-        <item>oxygen</item>
-        <item>rhythmic</item>
-        <item>jukebox</item>
-        <item>zombie</item>
-        <item>mystify</item>
-        <item>fishhook</item>
-        <item>dwarves</item>
-        <item>shabiness</item>
+        <item>@string/word1</item>
+        <item>@string/word2</item>
+        <item>@string/word3</item>
+        <item>@string/word4</item>
+        <item>@string/word5</item>
+        <item>@string/word6</item>
+        <item>@string/word7</item>
+        <item>@string/word8</item>
+        <item>@string/word9</item>
+        <item>@string/word10</item>
     </string-array>
-
-
-
-
-
 </resources>

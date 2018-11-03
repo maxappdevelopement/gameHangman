@@ -2,14 +2,26 @@ package appdevelopement.max.hangman;
 
 import android.arch.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+
 public class SaveStateViewModel extends ViewModel {
 
+    private Hangman hangman;
     private boolean isActiveGame = false;
     private String word;
     private char guessLetter;
     private String hiddenWord;
     private String triesLeft;
     private String badLettersUsed;
+    private ArrayList<Character> guessLetters;
+
+    public void setHangman(Hangman hangman) {
+        this.hangman = hangman;
+    }
+
+    public Hangman getHangman() {
+        return hangman;
+    }
 
     public String getHiddenWord() {
         return hiddenWord;

@@ -13,8 +13,8 @@ public class Hangman {
 
 
     public Hangman(String word) {
-    this.word = word;
-    visible = new boolean[word.length()];
+        this.word = word;
+        visible = new boolean[word.length()];
     }
 
     public void setGuessLetter(char guessLetter) {
@@ -76,7 +76,7 @@ public class Hangman {
     public boolean hasUsedLetter(char guessLetter) {
         for (int i = 0; i < guessLetters.size(); i++) {
             if(guessLetters.get(i) == guessLetter) {
-            return true;
+                return true;
             }
         }
         return false;

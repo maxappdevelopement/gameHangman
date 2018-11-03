@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
+    Hangman hangman;
     FragmentManager manager;
 
     @Override
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
                 manager.beginTransaction().add(R.id.fragment_container, new HomeFragment()).commit();
             }
         }
+
     }
 
     @Override

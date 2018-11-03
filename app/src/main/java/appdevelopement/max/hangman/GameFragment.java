@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,6 +37,7 @@ public class GameFragment extends Fragment {
     EditText letterGuess;
     Hangman hangman;
     String randomWord;
+    char guessLetter;
 
     public GameFragment() {
     }
@@ -66,14 +68,24 @@ public class GameFragment extends Fragment {
             String wordsArray[] = getResources().getStringArray(R.array.playWords);
             randomWord = wordsArray[random.nextInt(wordsArray.length)];
             hangman = new Hangman(randomWord.toLowerCase());
+            model.setHangman(hangman);
             model.setWord(hangman.getWord());
 
-            // första gången spelet skapas, sätt värdena från hangman i model
+
+            // byta ut xml kod till snake_case
+            //metod för toast
+            //pop
+            //recreate
+            //första gången spelet skapas, sätt värdena från hangman i model
             model.setHiddenWord(hangman.getHiddenWord());
             model.setTriesLeft(hangman.getTriesLeft());
             model.setBadLettersUsed(hangman.getBadLettersUsed());
             model.setActiveGame(true);
+        } else {
+            hangman = model.getHangman();
         }
+
+
 
         //displaya värden som ligger i model direkt om aktiv
         displayHiddenWord.setText(model.getHiddenWord());
@@ -88,15 +100,20 @@ public class GameFragment extends Fragment {
 
     public void guessButton(View view) {
 
-        char guessLetter = letterGuess.getText().charAt(0);
+       if (letterGuess.getText().length() > 0) {
+            guessLetter = letterGuess.getText().charAt(0);
+            model.setGuessLetter(guessLetter);
+       }
 
         if (multipleLetter() || !Character.isAlphabetic(guessLetter)) {
-            Toast.makeText(getActivity(), getString(R.string.oneLetter), Toast.LENGTH_SHORT).show();
-        } else if (hasUsedLetter()) {
-            Toast.makeText(getActivity(), getString(R.string.usedLetter), Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(getActivity(), getString(R.string.oneLetter), Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 200);
+       } else if (hasUsedLetter()) {
+           Toast.makeText(getActivity(), getString(R.string.usedLetter), Toast.LENGTH_SHORT).show();
         } else {
-            hangman.guess(guessLetter);
-            hangman.setGuessLetter(guessLetter);
+
+            hangman.guess(model.getGuessLetter());
+            hangman.setGuessLetter(model.getGuessLetter());
 
             displayHiddenWord.setText(hangman.getHiddenWord());
             numberOfTriesLeft.setText(hangman.getTriesLeft());
@@ -110,7 +127,7 @@ public class GameFragment extends Fragment {
             model.setHiddenWord(hangman.getHiddenWord());
             model.setTriesLeft(hangman.getTriesLeft());
             model.setBadLettersUsed(hangman.getBadLettersUsed());
-            model.setGuessLetter(guessLetter);
+
 
             if (model.getWord().equals(hangman.getHiddenWord().replaceAll("\\s+", ""))) {
                 Fragment result = new ResultFragment();
@@ -131,15 +148,18 @@ public class GameFragment extends Fragment {
         }
     }
 
+
     private boolean hasUsedLetter() {
         EditText editText = getView().findViewById(R.id.guessLetter);
         char guessLetter = editText.getText().charAt(0);
-        if (hangman.hasUsedLetter(guessLetter)) {
+        if (hangman.hasUsedLetter(model.getGuessLetter())) {
             return true;
         } else {
             return false;
         }
     }
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

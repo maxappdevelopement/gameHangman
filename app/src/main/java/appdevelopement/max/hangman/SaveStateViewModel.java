@@ -2,8 +2,6 @@ package appdevelopement.max.hangman;
 
 import android.arch.lifecycle.ViewModel;
 
-
-
 public class SaveStateViewModel extends ViewModel {
 
     private Hangman hangman;

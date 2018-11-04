@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/play_action"
-        android:icon="@drawable/ic_play_arrow_black_24dp"
+        android:icon="@drawable/ic_action_play"
         android:title="@string/play_button"
         app:showAsAction="ifRoom"/>
 

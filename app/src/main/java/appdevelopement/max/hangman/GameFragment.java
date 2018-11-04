@@ -93,7 +93,6 @@ public class GameFragment extends Fragment {
                     makeToast(R.string.used_letter);
 
                 } else {
-
                     hangman.setGuessLetter(guessLetter);
                     hangman.guess(guessLetter);
 
@@ -156,8 +155,6 @@ public class GameFragment extends Fragment {
     }
 
 
-
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu, menu);
@@ -189,7 +186,6 @@ public class GameFragment extends Fragment {
 
     private void createGameFragmentToolbar(View view) {
         Toolbar toolbar = view.findViewById(R.id.custom_toolbar);
-        Log.d("apptoolbar", HomeFragment.themeColor+"");
         toolbar.setBackground(new ColorDrawable(HomeFragment.themeColor));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);

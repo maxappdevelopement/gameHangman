@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,6 +49,7 @@ public class GameFragment extends Fragment {
         triesLeft = view.findViewById(R.id.number_of_tries_left);
         badLettersUsed = view.findViewById(R.id.bad_letters_used);
         userInput = view.findViewById(R.id.guess_letter);
+
         return view;
     }
 
@@ -62,13 +64,14 @@ public class GameFragment extends Fragment {
             hangman = new Hangman(randomWord.toLowerCase());
             model.setHangman(hangman);
             model.setActiveGame(true);
+
         } else {
             hangman = model.getHangman();
         }
 
-        hiddenWord.setText(model.getHangman().getHiddenWord());
-        triesLeft.setText(model.getHangman().getTriesLeft());
-        badLettersUsed.setText(model.getHangman().getBadLettersUsed());
+        hiddenWord.setText(hangman.getHiddenWord());
+        triesLeft.setText(hangman.getTriesLeft());
+        badLettersUsed.setText(hangman.getBadLettersUsed());
         loadPicture();
     }
 
@@ -76,15 +79,21 @@ public class GameFragment extends Fragment {
         char guessLetter;
         if (multipleLetter()) {
             makeToast(R.string.one_letter);
+
         } else if (isInput()) {
             guessLetter = userInput.getText().charAt(0);
+
             if (!Character.isAlphabetic(guessLetter)) {
                 makeToast(R.string.one_letter);
+
             } else {
                 model.setGuessLetter(guessLetter);
+
                 if (hasUsedLetter()) {
                     makeToast(R.string.used_letter);
+
                 } else {
+
                     hangman.setGuessLetter(guessLetter);
                     hangman.guess(guessLetter);
 
@@ -102,8 +111,6 @@ public class GameFragment extends Fragment {
             }
         }
     }
-
-    // fixa icon istället för png på ikoner
 
     private boolean checkWin() {
       return hangman.getWord().equals(hangman.getHiddenWord().replaceAll("\\s+", ""));
@@ -148,6 +155,9 @@ public class GameFragment extends Fragment {
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).commit();
     }
 
+
+
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu, menu);
@@ -179,6 +189,7 @@ public class GameFragment extends Fragment {
 
     private void createGameFragmentToolbar(View view) {
         Toolbar toolbar = view.findViewById(R.id.custom_toolbar);
+        Log.d("apptoolbar", HomeFragment.themeColor+"");
         toolbar.setBackground(new ColorDrawable(HomeFragment.themeColor));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
@@ -186,6 +197,7 @@ public class GameFragment extends Fragment {
         activity.getSupportActionBar().setTitle(R.string.title_hangman);
         setHasOptionsMenu(true);
     }
+
 }
 
 

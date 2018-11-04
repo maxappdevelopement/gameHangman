@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,7 +34,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        //themeColor = getActivity().getColor(R.color.defaultColor);
         createHomeFragmentToolBar(view);
 
         switchButton = view.findViewById(R.id.switch_button);
@@ -56,9 +56,9 @@ public class HomeFragment extends Fragment {
             switchButton.setChecked(true);
         } else {
             switchButton.setChecked(false);
+            themePictures = getString(R.string.default_theme);
         }
 
-        themePictures = getString(R.string.default_theme);
         switchButton.setOnCheckedChangeListener((compoundButton, bChecked) -> {
             if (switchButton.isChecked()) {
                 model.setActiveTheme(true);
@@ -106,11 +106,14 @@ public class HomeFragment extends Fragment {
 
     public void createHomeFragmentToolBar(View view) {
     Toolbar toolbar = view.findViewById(R.id.custom_toolbar);
-
-    toolbar.setBackground(new ColorDrawable(themeColor));
+    if (themeColor==0) {
+        themeColor = getActivity().getColor(R.color.defaultColor);
+        toolbar.setBackground(new ColorDrawable(getActivity().getColor(R.color.defaultColor)));
+    } else {
+        toolbar.setBackground(new ColorDrawable(themeColor));
+    }
     AppCompatActivity activity = (AppCompatActivity) getActivity();
     activity.setSupportActionBar(toolbar);
-
     activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);
     setHasOptionsMenu(true);
     }

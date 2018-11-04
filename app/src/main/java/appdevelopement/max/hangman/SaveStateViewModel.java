@@ -2,7 +2,7 @@ package appdevelopement.max.hangman;
 
 import android.arch.lifecycle.ViewModel;
 
-import java.util.ArrayList;
+
 
 public class SaveStateViewModel extends ViewModel {
 

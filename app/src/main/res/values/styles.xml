@@ -6,30 +6,6 @@
     </style>
         <!-- Customize your theme here. -->
     <style name="CustomToolbarStyle" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
 
-     <item name="android:textSize">10sp</item>
-
- </style>
-
-
-
- <!--
-    <attr name="toolbar_halloween_theme" format="reference" />
-
-    <style name="Theme.MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/halloweenColor</item>
-        <item name="android:textSize">10sp</item>
-
-     <item name="toolbar_theme">@style/Theme.MyTheme.Toolbar</item>
- </style>
-
- -->
-
-    <!--
-        <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-            <item name="android:showAsAction">ifRoom</item>
-            <item name="android:textSize">20sp</item>
-        </style>
-     -->
-
-    </resources>
+</resources>

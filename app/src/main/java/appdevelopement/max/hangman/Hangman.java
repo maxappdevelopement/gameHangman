@@ -11,7 +11,6 @@ public class Hangman {
     private ArrayList<Character> guessLetters = new ArrayList<>();
     char guessLetter;
 
-
     public Hangman(String word) {
         this.word = word;
         visible = new boolean[word.length()];

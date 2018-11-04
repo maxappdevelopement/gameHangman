@@ -124,8 +124,7 @@ public class GameFragment extends Fragment {
      }
 
     private boolean multipleLetter() {
-        EditText guessLetter = getView().findViewById(R.id.guess_letter);
-        return (guessLetter.length() > 1);
+        return (userInput.length() > 1);
     }
 
     private boolean hasUsedLetter() {

@@ -8,6 +8,7 @@ public class SaveStateViewModel extends ViewModel {
 
     private Hangman hangman;
     private boolean isActiveGame = false;
+    private boolean isActiveTheme = false;
     private char guessLetter;
 
     public void setHangman(Hangman hangman) {
@@ -32,5 +33,13 @@ public class SaveStateViewModel extends ViewModel {
 
     public void setActiveGame(boolean active) {
         isActiveGame = active;
+    }
+
+    public boolean isActiveTheme() {
+        return isActiveTheme;
+    }
+
+    public void setActiveTheme(boolean activeTheme) {
+        isActiveTheme = activeTheme;
     }
 }

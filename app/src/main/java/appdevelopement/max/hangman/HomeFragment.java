@@ -1,6 +1,8 @@
 package appdevelopement.max.hangman;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,6 +24,7 @@ public class HomeFragment extends Fragment {
     private Button aboutButton;
     private Button playButton;
     static String themePictures;
+    static int themeColor;
 
     public HomeFragment() {
     }
@@ -30,11 +33,13 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        //themeColor = getActivity().getColor(R.color.defaultColor);
         createHomeFragmentToolBar(view);
 
         switchButton = view.findViewById(R.id.switch_button);
         aboutButton = view.findViewById(R.id.about_button);
         playButton = view.findViewById(R.id.play_button);
+
         return view;
     }
 
@@ -47,12 +52,25 @@ public class HomeFragment extends Fragment {
             playButton.setText(getString(R.string.game_continue));
         }
 
+        if (model.isActiveTheme()) {
+            switchButton.setChecked(true);
+        } else {
+            switchButton.setChecked(false);
+        }
+
         themePictures = getString(R.string.default_theme);
         switchButton.setOnCheckedChangeListener((compoundButton, bChecked) -> {
             if (switchButton.isChecked()) {
+                model.setActiveTheme(true);
                 themePictures = getString(R.string.halloween_theme);
+                themeColor = getActivity().getColor(R.color.halloweenColor);
+                getActivity().recreate();
+
             } else {
+                model.setActiveTheme(false);
                 themePictures = getString(R.string.default_theme);
+                themeColor = getActivity().getColor(R.color.defaultColor);
+                getActivity().recreate();
             }
         });
 
@@ -87,12 +105,14 @@ public class HomeFragment extends Fragment {
     }
 
     public void createHomeFragmentToolBar(View view) {
-    Toolbar toolbar = view.findViewById(R.id.app_bar);
+    Toolbar toolbar = view.findViewById(R.id.custom_toolbar);
+
+    toolbar.setBackground(new ColorDrawable(themeColor));
     AppCompatActivity activity = (AppCompatActivity) getActivity();
     activity.setSupportActionBar(toolbar);
+
     activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);
     setHasOptionsMenu(true);
-
     }
 
 

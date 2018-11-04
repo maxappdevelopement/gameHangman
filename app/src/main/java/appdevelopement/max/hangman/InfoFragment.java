@@ -1,5 +1,6 @@
 package appdevelopement.max.hangman;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -50,7 +51,8 @@ public class InfoFragment extends Fragment {
     }
 
     private void createInfoFragmentToolbar(View view) {
-        Toolbar toolbar = view.findViewById(R.id.app_bar);
+        Toolbar toolbar = view.findViewById(R.id.custom_toolbar);
+        toolbar.setBackground(new ColorDrawable(HomeFragment.themeColor));
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);

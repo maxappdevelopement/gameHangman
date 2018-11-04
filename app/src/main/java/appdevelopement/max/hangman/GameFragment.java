@@ -1,6 +1,7 @@
 package appdevelopement.max.hangman;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -86,13 +87,15 @@ public class GameFragment extends Fragment {
                 } else {
                     hangman.setGuessLetter(guessLetter);
                     hangman.guess(guessLetter);
+
                     hiddenWord.setText(hangman.getHiddenWord());
                     triesLeft.setText(hangman.getTriesLeft());
                     badLettersUsed.setText(hangman.getBadLettersUsed());
                     loadPicture();
-                    if (hangman.getWord().equals(hangman.getHiddenWord().replaceAll("\\s+", ""))) {
+
+                    if (checkWin()) {
                         newResultFragment();
-                    } else if (Integer.parseInt(hangman.getTriesLeft()) == 0) {
+                    } else if (checkLoose()) {
                         newResultFragment();
                     }
                 }
@@ -100,9 +103,15 @@ public class GameFragment extends Fragment {
         }
     }
 
-    // recreate för att tema ska ändra sig direkt till orange
-    // layouta när du vänder på skiten?
-    // stack på ngt?
+    // fixa icon istället för png på ikoner
+
+    private boolean checkWin() {
+      return hangman.getWord().equals(hangman.getHiddenWord().replaceAll("\\s+", ""));
+    }
+
+    private boolean checkLoose() {
+        return Integer.parseInt(hangman.getTriesLeft()) == 0;
+    }
 
     private boolean isInput() {
          return (userInput.getText().length() > 0);
@@ -110,11 +119,7 @@ public class GameFragment extends Fragment {
 
     private boolean multipleLetter() {
         EditText guessLetter = getView().findViewById(R.id.guess_letter);
-        if (guessLetter.length() > 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return (guessLetter.length() > 1);
     }
 
     private boolean hasUsedLetter() {
@@ -142,7 +147,6 @@ public class GameFragment extends Fragment {
         Fragment result = new ResultFragment();
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).commit();
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -174,7 +178,8 @@ public class GameFragment extends Fragment {
     }
 
     private void createGameFragmentToolbar(View view) {
-        Toolbar toolbar = view.findViewById(R.id.app_bar);
+        Toolbar toolbar = view.findViewById(R.id.custom_toolbar);
+        toolbar.setBackground(new ColorDrawable(HomeFragment.themeColor));
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);

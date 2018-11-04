@@ -32,9 +32,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         createHomeFragmentToolBar(view);
 
-        switchButton = view.findViewById(R.id.switchButton);
-        aboutButton = view.findViewById(R.id.aboutButton);
-        playButton = view.findViewById(R.id.playButton);
+        switchButton = view.findViewById(R.id.switch_button);
+        aboutButton = view.findViewById(R.id.about_button);
+        playButton = view.findViewById(R.id.play_button);
         return view;
     }
 
@@ -44,15 +44,15 @@ public class HomeFragment extends Fragment {
         model = ViewModelProviders.of(getActivity()).get(SaveStateViewModel.class);
 
         if (model.isActiveGame()) {
-            playButton.setText(getString(R.string.gameContinue));
+            playButton.setText(getString(R.string.game_continue));
         }
 
-        themePictures = getString(R.string.defaultTheme);
+        themePictures = getString(R.string.default_theme);
         switchButton.setOnCheckedChangeListener((compoundButton, bChecked) -> {
             if (switchButton.isChecked()) {
-                themePictures = getString(R.string.halloweenTheme);
+                themePictures = getString(R.string.halloween_theme);
             } else {
-                themePictures = getString(R.string.defaultTheme);
+                themePictures = getString(R.string.default_theme);
             }
         });
 
@@ -94,5 +94,7 @@ public class HomeFragment extends Fragment {
     setHasOptionsMenu(true);
 
     }
+
+
 }
 

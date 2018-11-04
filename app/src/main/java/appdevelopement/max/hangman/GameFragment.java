@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,21 +41,21 @@ public class GameFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         createGameFragmentToolbar(view);
 
-        pictureView = view.findViewById(R.id.pictureView);
-        hiddenWord = view.findViewById(R.id.displayHiddenWord);
-        triesLeft = view.findViewById(R.id.numberOfTriesLeft);
-        badLettersUsed = view.findViewById(R.id.badLettersUsed);
-        userInput = view.findViewById(R.id.guessLetter);
+        pictureView = view.findViewById(R.id.picture_view);
+        hiddenWord = view.findViewById(R.id.hidden_word);
+        triesLeft = view.findViewById(R.id.number_of_tries_left);
+        badLettersUsed = view.findViewById(R.id.bad_letters_used);
+        userInput = view.findViewById(R.id.guess_letter);
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getActivity().findViewById(R.id.guessButton).setOnClickListener(this::guessButton);
+        getActivity().findViewById(R.id.guess_button).setOnClickListener(this::guessButton);
 
         if (!model.isActiveGame()) {
-            String wordsArray[] = getResources().getStringArray(R.array.playWords);
+            String wordsArray[] = getResources().getStringArray(R.array.play_words);
             String randomWord = wordsArray[random.nextInt(wordsArray.length)];
             hangman = new Hangman(randomWord.toLowerCase());
             model.setHangman(hangman);
@@ -74,15 +73,15 @@ public class GameFragment extends Fragment {
     public void guessButton(View view) {
         char guessLetter;
         if (multipleLetter()) {
-            makeToast(R.string.oneLetter);
+            makeToast(R.string.one_letter);
         } else if (isInput()) {
             guessLetter = userInput.getText().charAt(0);
             if (!Character.isAlphabetic(guessLetter)) {
-                makeToast(R.string.oneLetter);
+                makeToast(R.string.one_letter);
             } else {
                 model.setGuessLetter(guessLetter);
                 if (hasUsedLetter()) {
-                    makeToast(R.string.usedLetter);
+                    makeToast(R.string.used_letter);
                 } else {
                     hangman.setGuessLetter(guessLetter);
                     hangman.guess(guessLetter);
@@ -100,9 +99,11 @@ public class GameFragment extends Fragment {
         }
     }
 
-    // byta ut xml kod till snake_case
-    //pop
-    //recreate
+    // stack på ngt?
+    //recreate för att tema ska ändra sig direkt till orange
+    // kolla att språk funkar
+    // layouta när du vänder på skiten?
+    // fixa manifest så det är riktigt
 
 
     private boolean isInput() {
@@ -113,7 +114,7 @@ public class GameFragment extends Fragment {
      }
 
     private boolean multipleLetter() {
-        EditText guessLetter = getView().findViewById(R.id.guessLetter);
+        EditText guessLetter = getView().findViewById(R.id.guess_letter);
         if (guessLetter.length() > 1) {
             return true;
         } else {
@@ -144,7 +145,6 @@ public class GameFragment extends Fragment {
         Fragment result = new ResultFragment();
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).commit();
     }
-
 
 
     @Override
@@ -181,7 +181,7 @@ public class GameFragment extends Fragment {
         final AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);
-        activity.getSupportActionBar().setTitle(R.string.titleHangman);
+        activity.getSupportActionBar().setTitle(R.string.title_hangman);
         setHasOptionsMenu(true);
     }
 }

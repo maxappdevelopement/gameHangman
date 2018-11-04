@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="MainMenu">Huvudmeny</string>
-    <string name="playButton">Spelknapp</string>
-    <string name="infoButton">Information</string>
-    <string name="about">Programmerad av Max</string>
-    <string name="wordWas">Ordet var</string>
-    <string name="youWon">Du vann!</string>
-    <string name="youLost">Du förlorade!</string>
-    <string name="titleResult">Resultat</string>
-    <string name="scoreTriesLeft">Antal försök</string>
-    <string name="backToMenu">Tillbaka till huvudmeny</string>
-    <string name="titleHangman">Hänga gubbe</string>
-    <string name="guessButton">Gissning</string>
-    <string name="pictureView">Bild</string>
-    <string name="guessALetter">Gissa en bokstav</string>
-    <string name="triesLeft">Försök kvar</string>
-    <string name="titleAbout">Om spelet</string>
-    <string name="backArrow">Tillbaka</string>
-    <string name="oneLetter">Bara en bokstav tillåten</string>
-    <string name="usedLetter">Bokstav redan använd</string>
+    <string name="main_menu">Huvudmeny</string>
+    <string name="play_button">Spelknapp</string>
+    <string name="info_button">Information</string>
+    <string name="about_description">Programmerad av Max</string>
+    <string name="word_was">Ordet var</string>
+    <string name="you_won">Du vann!</string>
+    <string name="you_lost">Du förlorade!</string>
+    <string name="title_result">Resultat</string>
+    <string name="score_tries_left">Antal försök</string>
+    <string name="back_to_menu">Tillbaka till huvudmeny</string>
+    <string name="title_hangman">Hänga gubbe</string>
+    <string name="guess_button">Gissning</string>
+    <string name="picture_view">Bild</string>
+    <string name="guess_a_letter">Gissa en bokstav</string>
+    <string name="tries_left">Försök kvar</string>
+    <string name="title_about">Om spelet</string>
+    <string name="back_arrow">Tillbaka</string>
+    <string name="one_letter">Bara en bokstav tillåten</string>
+    <string name="used_letter">Bokstav redan använd</string>
     <string name="theme">Tema</string>
-    <string name="playGame">Spela spelet</string>
+    <string name="play_game">Spela spelet</string>
 
     <string name="word1">säckpipor</string>
     <string name="word2">sockerbagare</string>
@@ -32,5 +32,5 @@
     <string name="word8">fiskkrok</string>
     <string name="word9">dvärgar</string>
     <string name="word10">sunkighet</string>
-    <string name="gameContinue">Fortsätt</string>
+    <string name="game_continue">Fortsätt</string>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="playWords">
+    <string-array name="play_words">
         <item>@string/word1</item>
         <item>@string/word2</item>
         <item>@string/word3</item>

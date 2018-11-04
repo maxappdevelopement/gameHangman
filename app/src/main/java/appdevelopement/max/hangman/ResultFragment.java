@@ -30,10 +30,10 @@ public class ResultFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_result, container, false);
         createResultFragmentToolBar(view);
 
-        backMenu = view.findViewById(R.id.backMenu);
-        wonOrLost = view.findViewById(R.id.wonOrLost);
-        wordWas = view.findViewById(R.id.containsWordWas);
-        scoreTriesLeft = view.findViewById(R.id.containsScoreTriesLeft);
+        backMenu = view.findViewById(R.id.back_menu);
+        wonOrLost = view.findViewById(R.id.won_or_lost);
+        wordWas = view.findViewById(R.id.container_word_was);
+        scoreTriesLeft = view.findViewById(R.id.container_score_tries_left);
 
         return view;
     }
@@ -43,10 +43,10 @@ public class ResultFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         if (Integer.parseInt(model.getHangman().getTriesLeft())>0) {
-            wonOrLost.setText(getResources().getString(R.string.youWon));
+            wonOrLost.setText(getResources().getString(R.string.you_won));
             model.setActiveGame(false);
         } else {
-            wonOrLost.setText(getResources().getString(R.string.youLost));
+            wonOrLost.setText(getResources().getString(R.string.you_lost));
             model.setActiveGame(false);
         }
 
@@ -54,7 +54,7 @@ public class ResultFragment extends Fragment {
         scoreTriesLeft.setText(model.getHangman().getTriesLeft());
 
         backMenu.setOnClickListener(v -> getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment(), null).addToBackStack(null).commit());
+                new HomeFragment(), null).commit());
     }
 
 
@@ -76,8 +76,6 @@ public class ResultFragment extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new GameFragment()).addToBackStack(null).commit();
                 break;
-            default:
-                // unknown error
         }
         return super.onOptionsItemSelected(item);
     }
@@ -87,7 +85,7 @@ public class ResultFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);
-        activity.getSupportActionBar().setTitle(R.string.titleResult);
+        activity.getSupportActionBar().setTitle(R.string.title_result);
         setHasOptionsMenu(true);
 
     }

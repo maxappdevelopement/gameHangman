@@ -21,10 +21,6 @@ public class Hangman {
         this.guessLetter = guessLetter;
     }
 
-    public char getGuessLetter() {
-        return guessLetter;
-    }
-
     public void guess(char guess) {
         guessLetters.add(guess);
     }

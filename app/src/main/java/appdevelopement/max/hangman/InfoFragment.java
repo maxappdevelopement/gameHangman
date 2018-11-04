@@ -54,7 +54,7 @@ public class InfoFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
         activity.getSupportActionBar().setIcon(R.drawable.ic_hangman);
-        activity.getSupportActionBar().setTitle(R.string.titleAbout);
+        activity.getSupportActionBar().setTitle(R.string.title_about);
         setHasOptionsMenu(true);
     }
 }

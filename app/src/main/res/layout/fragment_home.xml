@@ -12,42 +12,42 @@
     </include>
 
     <TextView
-        android:id="@+id/titleHangman"
+        android:id="@+id/title_hangman"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:text="@string/titleHangman"
+        android:text="@string/title_hangman"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
     <Button
-        android:id="@+id/playButton"
+        android:id="@+id/play_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="20dp"
-        android:text="@string/playGame"
+        android:text="@string/play_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchButton" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_button" />
 
     <Button
-        android:id="@+id/aboutButton"
+        android:id="@+id/about_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:paddingTop="20dp"
-        android:text="@string/titleAbout"
+        android:text="@string/title_about"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playButton" />
+        app:layout_constraintTop_toBottomOf="@+id/play_button" />
 
      <Switch
-         android:id="@+id/switchButton"
+         android:id="@+id/switch_button"
          android:layout_width="wrap_content"
          android:layout_height="25dp"
          android:layout_marginStart="8dp"
@@ -57,7 +57,7 @@
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintHorizontal_bias="0.042"
          app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/titleHangman" />
+         app:layout_constraintTop_toBottomOf="@+id/title_hangman" />
 
 
 </android.support.constraint.ConstraintLayout>

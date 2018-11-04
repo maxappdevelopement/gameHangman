@@ -11,7 +11,7 @@
         layout="@layout/custom_toolbar"></include>
 
     <TextView
-        android:id="@+id/wonOrLost"
+        android:id="@+id/won_or_lost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -22,56 +22,56 @@
 
 
     <TextView
-        android:id="@+id/wordWas"
+        android:id="@+id/word_was"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/wordWas"
+        android:text="@string/word_was"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wonOrLost" />
+        app:layout_constraintTop_toBottomOf="@+id/won_or_lost" />
 
     <TextView
-        android:id="@+id/scoreTriesLeft"
+        android:id="@+id/score_tries_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/scoreTriesLeft"
+        android:text="@string/score_tries_left"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wordWas" />
+        app:layout_constraintTop_toBottomOf="@+id/word_was" />
 
     <TextView
-        android:id="@+id/containsWordWas"
+        android:id="@+id/container_word_was"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/wordWas"
-        app:layout_constraintTop_toBottomOf="@+id/wonOrLost" />
+        app:layout_constraintStart_toEndOf="@+id/word_was"
+        app:layout_constraintTop_toBottomOf="@+id/won_or_lost" />
 
     <TextView
-        android:id="@+id/containsScoreTriesLeft"
+        android:id="@+id/container_score_tries_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/scoreTriesLeft"
-        app:layout_constraintTop_toBottomOf="@+id/wordWas" />
+        app:layout_constraintStart_toEndOf="@+id/score_tries_left"
+        app:layout_constraintTop_toBottomOf="@+id/word_was" />
 
     <Button
-        android:id="@+id/backMenu"
+        android:id="@+id/back_menu"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
-        android:text="@string/backToMenu"
+        android:text="@string/back_to_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scoreTriesLeft" />
+        app:layout_constraintTop_toBottomOf="@+id/score_tries_left" />
 
 
 </android.support.constraint.ConstraintLayout>

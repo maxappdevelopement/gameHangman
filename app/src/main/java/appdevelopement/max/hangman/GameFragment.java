@@ -100,6 +100,51 @@ public class GameFragment extends Fragment {
 
     public void guessButton(View view) {
 
+        if (letterGuess.getText().length() > 1) {
+            Toast.makeText(getActivity(), getString(R.string.oneLetter), Toast.LENGTH_SHORT).show();
+        } else if (letterGuess.getText().length() > 0) {
+            guessLetter = letterGuess.getText().charAt(0);
+            if (Character.isDigit(guessLetter)) {
+                Toast.makeText(getActivity(), "Not Alphabetic", Toast.LENGTH_SHORT).show();
+            } else {
+                model.setGuessLetter(guessLetter);
+                if (hasUsedLetter()) {
+                    Toast.makeText(getActivity(), "letter already used", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    hangman.guess(model.getGuessLetter());
+                    hangman.setGuessLetter(model.getGuessLetter());
+
+                    displayHiddenWord.setText(hangman.getHiddenWord());
+                    numberOfTriesLeft.setText(hangman.getTriesLeft());
+                    badLettersUsed.setText(hangman.getBadLettersUsed());
+                    Picasso.get()
+                            .load(HomeFragment.themePictures + hangman.getTriesLeft() + ".gif")
+                            .resize(400, 400)
+                            .into(pictureView);
+
+                    //sätt alla värden model så att de visas när det startas om
+                    model.setHiddenWord(hangman.getHiddenWord());
+                    model.setTriesLeft(hangman.getTriesLeft());
+                    model.setBadLettersUsed(hangman.getBadLettersUsed());
+
+
+                    if (hangman.getWord().equals(hangman.getHiddenWord().replaceAll("\\s+", ""))) {
+                        Fragment result = new ResultFragment();
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).addToBackStack(null).commit();
+                    } else if (Integer.parseInt(hangman.getTriesLeft()) == 0) {
+                        Fragment result = new ResultFragment();
+                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).addToBackStack(null).commit();
+                    }
+                }
+
+            }
+        }
+    }
+
+
+       /*
+
        if (letterGuess.getText().length() > 0) {
             guessLetter = letterGuess.getText().charAt(0);
             model.setGuessLetter(guessLetter);
@@ -138,6 +183,7 @@ public class GameFragment extends Fragment {
             }
         }
     }
+    */
 
     private boolean multipleLetter() {
         EditText guessLetter = getView().findViewById(R.id.guessLetter);
@@ -150,8 +196,6 @@ public class GameFragment extends Fragment {
 
 
     private boolean hasUsedLetter() {
-        EditText editText = getView().findViewById(R.id.guessLetter);
-        char guessLetter = editText.getText().charAt(0);
         if (hangman.hasUsedLetter(model.getGuessLetter())) {
             return true;
         } else {

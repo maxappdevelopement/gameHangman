@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -99,18 +100,12 @@ public class GameFragment extends Fragment {
         }
     }
 
-    // stack på ngt?
-    //recreate för att tema ska ändra sig direkt till orange
-    // kolla att språk funkar
+    // recreate för att tema ska ändra sig direkt till orange
     // layouta när du vänder på skiten?
-    // fixa manifest så det är riktigt
-
+    // stack på ngt?
 
     private boolean isInput() {
-         if(userInput.getText().length() > 0) {
-             return true;
-         }
-         return false;
+         return (userInput.getText().length() > 0);
      }
 
     private boolean multipleLetter() {
@@ -138,7 +133,9 @@ public class GameFragment extends Fragment {
     }
 
     private void makeToast(int toastText) {
-        Toast.makeText(getActivity(), getString(toastText), Toast.LENGTH_SHORT).show();
+        Toast toast = Toast.makeText(getActivity(), getString(toastText), Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP, 0, 565);
+        toast.show();
     }
 
     private void newResultFragment() {
@@ -185,39 +182,6 @@ public class GameFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 }
-
-/*
-        guess.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                //EditText editText = getView().findViewById(R.id.guessLetter);
-                char guessLetter = userInput.getText().charAt(0);
-                if (multipleLetter() || !Character.isAlphabetic(guessLetter)) {
-                    Toast.makeText(getActivity(), "Only one letter is allowed", Toast.LENGTH_SHORT).show();
-                //} else if (hasUsedLetter()) {
-                    Toast.makeText(getActivity(), "Letter already used", Toast.LENGTH_SHORT).show();
-                } else {
-                    hangman.guess(guessLetter);
-                    hangman.setGuessLetter(guessLetter);
-
-                    hiddenWord.setText(hangman.getHiddenWord());
-                    triesLeft.setText(hangman.getTriesLeft());
-                    badLettersUsed.setText(hangman.getBadLettersUsed());
-                    Picasso.get()
-                            .load(HomeFragment.themePictures + hangman.getTriesLeft() + ".gif")
-                            .resize(400, 400)
-                            .into(pictureView);
-
-                    //sätt alla värden model så att de visas när det startas om
-                    model.setHiddenWord(hangman.getHiddenWord());
-                    model.setTriesLeft(hangman.getTriesLeft());
-                    model.setBadLettersUsed(hangman.getBadLettersUsed());
-                   // model.setGuessLetter(hangman.getGuessLetter());
-                }
-            }
-        });
-        */
 
 
 

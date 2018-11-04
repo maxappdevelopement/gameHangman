@@ -3,12 +3,9 @@ package appdevelopement.max.hangman;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,17 +24,13 @@ import com.squareup.picasso.Picasso;
 public class GameFragment extends Fragment {
 
     SaveStateViewModel model;
-
+    Hangman hangman;
     Random random = new Random();
     ImageView pictureView;
-    private Button guess;
-    TextView displayHiddenWord;
-    TextView numberOfTriesLeft;
+    TextView hiddenWord;
+    TextView triesLeft;
     TextView badLettersUsed;
-    EditText letterGuess;
-    Hangman hangman;
-    String randomWord;
-    char guessLetter;
+    EditText userInput;
 
     public GameFragment() {
     }
@@ -50,12 +43,10 @@ public class GameFragment extends Fragment {
         createGameFragmentToolbar(view);
 
         pictureView = view.findViewById(R.id.pictureView);
-        guess = view.findViewById(R.id.guessButton);
-        displayHiddenWord = view.findViewById(R.id.displayHiddenWord);
-        numberOfTriesLeft = view.findViewById(R.id.numberOfTriesLeft);
+        hiddenWord = view.findViewById(R.id.displayHiddenWord);
+        triesLeft = view.findViewById(R.id.numberOfTriesLeft);
         badLettersUsed = view.findViewById(R.id.badLettersUsed);
-        letterGuess = view.findViewById(R.id.guessLetter);
-
+        userInput = view.findViewById(R.id.guessLetter);
         return view;
     }
 
@@ -66,124 +57,60 @@ public class GameFragment extends Fragment {
 
         if (!model.isActiveGame()) {
             String wordsArray[] = getResources().getStringArray(R.array.playWords);
-            randomWord = wordsArray[random.nextInt(wordsArray.length)];
+            String randomWord = wordsArray[random.nextInt(wordsArray.length)];
             hangman = new Hangman(randomWord.toLowerCase());
             model.setHangman(hangman);
-            model.setWord(hangman.getWord());
-
-
-            // byta ut xml kod till snake_case
-            //metod för toast
-            //pop
-            //recreate
-            //första gången spelet skapas, sätt värdena från hangman i model
-            model.setHiddenWord(hangman.getHiddenWord());
-            model.setTriesLeft(hangman.getTriesLeft());
-            model.setBadLettersUsed(hangman.getBadLettersUsed());
             model.setActiveGame(true);
         } else {
             hangman = model.getHangman();
         }
 
-
-
-        //displaya värden som ligger i model direkt om aktiv
-        displayHiddenWord.setText(model.getHiddenWord());
-        numberOfTriesLeft.setText(model.getTriesLeft());
-        badLettersUsed.setText(model.getBadLettersUsed());
-
-        Picasso.get()
-                .load(HomeFragment.themePictures + model.getTriesLeft() + ".gif")
-                .resize(400, 400)
-                .into(pictureView);
+        hiddenWord.setText(model.getHangman().getHiddenWord());
+        triesLeft.setText(model.getHangman().getTriesLeft());
+        badLettersUsed.setText(model.getHangman().getBadLettersUsed());
+        loadPicture();
     }
 
     public void guessButton(View view) {
-
-        if (letterGuess.getText().length() > 1) {
-            Toast.makeText(getActivity(), getString(R.string.oneLetter), Toast.LENGTH_SHORT).show();
-        } else if (letterGuess.getText().length() > 0) {
-            guessLetter = letterGuess.getText().charAt(0);
-            if (Character.isDigit(guessLetter)) {
-                Toast.makeText(getActivity(), "Not Alphabetic", Toast.LENGTH_SHORT).show();
+        char guessLetter;
+        if (multipleLetter()) {
+            makeToast(R.string.oneLetter);
+        } else if (isInput()) {
+            guessLetter = userInput.getText().charAt(0);
+            if (!Character.isAlphabetic(guessLetter)) {
+                makeToast(R.string.oneLetter);
             } else {
                 model.setGuessLetter(guessLetter);
                 if (hasUsedLetter()) {
-                    Toast.makeText(getActivity(), "letter already used", Toast.LENGTH_SHORT).show();
+                    makeToast(R.string.usedLetter);
                 } else {
-
-                    hangman.guess(model.getGuessLetter());
-                    hangman.setGuessLetter(model.getGuessLetter());
-
-                    displayHiddenWord.setText(hangman.getHiddenWord());
-                    numberOfTriesLeft.setText(hangman.getTriesLeft());
+                    hangman.setGuessLetter(guessLetter);
+                    hangman.guess(guessLetter);
+                    hiddenWord.setText(hangman.getHiddenWord());
+                    triesLeft.setText(hangman.getTriesLeft());
                     badLettersUsed.setText(hangman.getBadLettersUsed());
-                    Picasso.get()
-                            .load(HomeFragment.themePictures + hangman.getTriesLeft() + ".gif")
-                            .resize(400, 400)
-                            .into(pictureView);
-
-                    //sätt alla värden model så att de visas när det startas om
-                    model.setHiddenWord(hangman.getHiddenWord());
-                    model.setTriesLeft(hangman.getTriesLeft());
-                    model.setBadLettersUsed(hangman.getBadLettersUsed());
-
-
+                    loadPicture();
                     if (hangman.getWord().equals(hangman.getHiddenWord().replaceAll("\\s+", ""))) {
-                        Fragment result = new ResultFragment();
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).addToBackStack(null).commit();
+                        newResultFragment();
                     } else if (Integer.parseInt(hangman.getTriesLeft()) == 0) {
-                        Fragment result = new ResultFragment();
-                        getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).addToBackStack(null).commit();
+                        newResultFragment();
                     }
                 }
-
             }
         }
     }
 
-
-       /*
-
-       if (letterGuess.getText().length() > 0) {
-            guessLetter = letterGuess.getText().charAt(0);
-            model.setGuessLetter(guessLetter);
-       }
-
-        if (multipleLetter() || !Character.isAlphabetic(guessLetter)) {
-            Toast toast = Toast.makeText(getActivity(), getString(R.string.oneLetter), Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.TOP, 0, 200);
-       } else if (hasUsedLetter()) {
-           Toast.makeText(getActivity(), getString(R.string.usedLetter), Toast.LENGTH_SHORT).show();
-        } else {
-
-            hangman.guess(model.getGuessLetter());
-            hangman.setGuessLetter(model.getGuessLetter());
-
-            displayHiddenWord.setText(hangman.getHiddenWord());
-            numberOfTriesLeft.setText(hangman.getTriesLeft());
-            badLettersUsed.setText(hangman.getBadLettersUsed());
-            Picasso.get()
-                    .load(HomeFragment.themePictures + hangman.getTriesLeft() + ".gif")
-                    .resize(400, 400)
-                    .into(pictureView);
-
-            //sätt alla värden model så att de visas när det startas om
-            model.setHiddenWord(hangman.getHiddenWord());
-            model.setTriesLeft(hangman.getTriesLeft());
-            model.setBadLettersUsed(hangman.getBadLettersUsed());
+    // byta ut xml kod till snake_case
+    //pop
+    //recreate
 
 
-            if (model.getWord().equals(hangman.getHiddenWord().replaceAll("\\s+", ""))) {
-                Fragment result = new ResultFragment();
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).addToBackStack(null).commit();
-            } else if (Integer.parseInt(model.getTriesLeft()) == 0) {
-                Fragment result = new ResultFragment();
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).addToBackStack(null).commit();
-            }
-        }
-    }
-    */
+    private boolean isInput() {
+         if(userInput.getText().length() > 0) {
+             return true;
+         }
+         return false;
+     }
 
     private boolean multipleLetter() {
         EditText guessLetter = getView().findViewById(R.id.guessLetter);
@@ -194,13 +121,28 @@ public class GameFragment extends Fragment {
         }
     }
 
-
     private boolean hasUsedLetter() {
         if (hangman.hasUsedLetter(model.getGuessLetter())) {
             return true;
         } else {
             return false;
         }
+    }
+
+    private void loadPicture() {
+        Picasso.get()
+                .load(HomeFragment.themePictures + model.getHangman().getTriesLeft() + ".gif")
+                .resize(400, 400)
+                .into(pictureView);
+    }
+
+    private void makeToast(int toastText) {
+        Toast.makeText(getActivity(), getString(toastText), Toast.LENGTH_SHORT).show();
+    }
+
+    private void newResultFragment() {
+        Fragment result = new ResultFragment();
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, result).commit();
     }
 
 
@@ -250,7 +192,7 @@ public class GameFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //EditText editText = getView().findViewById(R.id.guessLetter);
-                char guessLetter = letterGuess.getText().charAt(0);
+                char guessLetter = userInput.getText().charAt(0);
                 if (multipleLetter() || !Character.isAlphabetic(guessLetter)) {
                     Toast.makeText(getActivity(), "Only one letter is allowed", Toast.LENGTH_SHORT).show();
                 //} else if (hasUsedLetter()) {
@@ -259,8 +201,8 @@ public class GameFragment extends Fragment {
                     hangman.guess(guessLetter);
                     hangman.setGuessLetter(guessLetter);
 
-                    displayHiddenWord.setText(hangman.getHiddenWord());
-                    numberOfTriesLeft.setText(hangman.getTriesLeft());
+                    hiddenWord.setText(hangman.getHiddenWord());
+                    triesLeft.setText(hangman.getTriesLeft());
                     badLettersUsed.setText(hangman.getBadLettersUsed());
                     Picasso.get()
                             .load(HomeFragment.themePictures + hangman.getTriesLeft() + ".gif")

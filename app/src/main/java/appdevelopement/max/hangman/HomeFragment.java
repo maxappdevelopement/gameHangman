@@ -1,5 +1,6 @@
 package appdevelopement.max.hangman;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,13 +35,17 @@ public class HomeFragment extends Fragment {
         switchButton = view.findViewById(R.id.switchButton);
         aboutButton = view.findViewById(R.id.aboutButton);
         playButton = view.findViewById(R.id.playButton);
-
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        model = ViewModelProviders.of(getActivity()).get(SaveStateViewModel.class);
+
+        if (model.isActiveGame()) {
+            playButton.setText(getString(R.string.gameContinue));
+        }
 
         themePictures = getString(R.string.defaultTheme);
         switchButton.setOnCheckedChangeListener((compoundButton, bChecked) -> {
@@ -51,14 +56,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-       // if (isActive) {
-      //      aboutButton.setText(getString(R.string.gameContinue));
-      //  }
-
         aboutButton.setOnClickListener(v -> getFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new InfoFragment(), null).addToBackStack(null).commit());
 
-        playButton.setOnClickListener(v -> getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+        playButton.setOnClickListener(v ->
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new GameFragment(), null).addToBackStack(null).commit());
     }
 
@@ -76,6 +78,7 @@ public class HomeFragment extends Fragment {
                         new InfoFragment()).addToBackStack(null).commit();
                 break;
             case R.id.play_action:
+                model.setActiveGame(false);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new GameFragment()).addToBackStack(null).commit();
                 break;

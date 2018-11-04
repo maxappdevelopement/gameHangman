@@ -42,7 +42,7 @@ public class ResultFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (Integer.parseInt(model.getTriesLeft())>0) {
+        if (Integer.parseInt(model.getHangman().getTriesLeft())>0) {
             wonOrLost.setText(getResources().getString(R.string.youWon));
             model.setActiveGame(false);
         } else {
@@ -50,8 +50,8 @@ public class ResultFragment extends Fragment {
             model.setActiveGame(false);
         }
 
-        wordWas.setText(model.getWord().replaceAll("\\s+","").toUpperCase());
-        scoreTriesLeft.setText(model.getTriesLeft());
+        wordWas.setText(model.getHangman().getWord().replaceAll("\\s+","").toUpperCase());
+        scoreTriesLeft.setText(model.getHangman().getTriesLeft());
 
         backMenu.setOnClickListener(v -> getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment(), null).addToBackStack(null).commit());
@@ -72,6 +72,7 @@ public class ResultFragment extends Fragment {
                         new InfoFragment()).addToBackStack(null).commit();
                 break;
             case R.id.play_action:
+                model.setActiveGame(false);
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new GameFragment()).addToBackStack(null).commit();
                 break;
